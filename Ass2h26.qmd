@@ -42,18 +42,16 @@ eval: true
 # Feel free to add more stash
 ---
 
-## What is TidyTuesday?
+## First slide
 
-Weekly social data project
+Incremental point list
 
 ::: incremental
-- new dataset every Monday
-- open for everyone
-- #TidyTuesday
-:::
-
-::: footer
-Source: [@RfordatascienceTidytuesday2026]
+- one
+  1.  en
+  2.  to
+  3.  tre
+- neste
 :::
 
 ## Why might this be relevant for us?
@@ -76,50 +74,225 @@ skills.
 :::
 ::::
 
-## Dead Sea Scrolls Manuscripts
+## How to participate in TidyTuesday
+
+::: fragment
+- TidyTuesday is a repo in GitHub
+  1.  Every Monday a new dataset of information about variables
+  2.  Load dataset in R-studio
+  3.  See dataset and tables
+:::
+
+```{r}
+#| eval: false
+install.packages("tidytuesdayR")  # bare første gang
+library(tidytuesdayR)
+library(tidyverse)
+
+data <- tt_load("2026-09-29")
+```
+
+```{r}
+#| eval: false
+names(data)
+```
+
+```{r}
+#| eval: false
+df <- data[[1]]
+
+glimpse(df)
+summary(df)
+```
+
+Make for example a figure with ggplot, an analysis, model or Quarto
+report, and share the result and your code on social media with the
+#TidyTuesday hashtag
+
+## Two columns slide; first incremental
 
 :::::: columns
 :::: {.column .fragment width="50%"}
-Example: Dead Sea Scrolls manuscripts
+Some text
 
 ::: incremental
-- Data: catalog of Dead Sea Scrolls manuscripts
-- Question: which works have the most manuscripts?
-- Finding: 1 Enoch has as many manuscripts as Genesis (24 each)
+- one
+  1.  en
+  2.  to
+  3.  tre
+- neste
 :::
 ::::
 
 ::: {.column .fragment width="50%"}
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-#| fig-width: 5
-#| fig-height: 5 
-library(tidyverse)
-
-tt <- tidytuesdayR::tt_load(2026, week = 37)
-dead_sea_scrolls <- tt$dead_sea_scrolls
-
-book_counts <- dead_sea_scrolls |>
-  filter(!is.na(biblical_book)) |>
-  count(biblical_book, canon_status, name = "n_manuscripts", sort = TRUE)
-
-book_counts |>
-  filter(n_manuscripts >= 16) |>
-  mutate(biblical_book = fct_reorder(biblical_book, n_manuscripts)) |>
-  ggplot(aes(x = n_manuscripts, y = biblical_book)) +
-  geom_point(size = 3) +
-  labs(x = "Number of manuscripts", y = NULL)
-```
+- 1
+  1.  en
+  2.  to
+  3.  tre
+- 2
 :::
 ::::::
 
-::: footer
-Source: [@ponceBiblicalCanonTells2026]
+## Country music lyrics
+
+::::::: columns
+:::: {.column .incremental width="50%"}
+::: fragment
+Example analysis of a TidyTuesday dataset
 :::
 
 ## Global Health Spending
+
+- Country music lyrics dataset
+
+  1.  Includes lyrics, artists and producers
+  2.  This analysis focus on producers
+  3.  Lines connect producers and artists
+  4.  Thicker lines means more songs together
+  5.  Dan Huff: 59 songs, 17 artist (broadest network)
+  6.  Some producers mainly work with one artist
+  7.  Shows hos one dataset can answer different questions
+::::
+
+::: {.column .incremental width="50%"}
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: "100%"
+
+library(tidyverse)
+
+# resten av koden
+#| warning: false
+#| message: false
+#| fig-width: 11
+#| fig-height: 8
+#| out-width: "100%"
+
+library(tidyverse)
+
+# Load data
+country_lyrics <- read_csv(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-08-25/country_lyrics.csv",
+  show_col_types = FALSE
+)
+
+# Select producers
+selected_producers <- c(
+  "Michael Knox",
+  "Jeff Stevens",
+  "Byron Gallimore",
+  "Ross Copperman",
+  "Jay Joyce",
+  "Dann Huff"
+)
+
+# Clean and summarise data
+producer_data <- country_lyrics |>
+  filter(!is.na(producer)) |>
+  separate_longer_delim(producer, delim = ",") |>
+  mutate(producer = str_squish(producer)) |>
+  filter(producer %in% selected_producers) |>
+  count(producer, artist, name = "number_of_songs") |>
+  group_by(producer) |>
+  arrange(desc(number_of_songs), artist, .by_group = TRUE) |>
+  mutate(
+    artist_position = row_number(),
+    producer_position = (n() + 1) / 2
+  ) |>
+  ungroup()
+
+# Producer labels and totals
+producer_summary <- producer_data |>
+  group_by(producer) |>
+  summarise(
+    producer_position = first(producer_position),
+    total_songs = sum(number_of_songs),
+    number_of_artists = n_distinct(artist),
+    .groups = "drop"
+  ) |>
+  mutate(
+    label = paste0(
+      producer, "\n",
+      total_songs, " songs across ",
+      number_of_artists, " artists"
+    )
+  )
+
+# Create the figure
+ggplot(producer_data) +
+  geom_curve(
+    aes(
+      x = 0,
+      y = producer_position,
+      xend = 1,
+      yend = artist_position,
+      linewidth = number_of_songs
+    ),
+    curvature = 0.25,
+    colour = "#70405D",
+    alpha = 0.7
+  ) +
+  geom_point(
+    data = producer_summary,
+    aes(x = 0, y = producer_position),
+    size = 3,
+    colour = "#70405D"
+  ) +
+  geom_point(
+    aes(x = 1, y = artist_position),
+    size = 2,
+    colour = "#70405D"
+  ) +
+  geom_text(
+    data = producer_summary,
+    aes(x = -0.05, y = producer_position, label = label),
+    hjust = 1,
+    fontface = "bold",
+    size = 3
+  ) +
+  geom_text(
+    aes(x = 1.05, y = artist_position, label = artist),
+    hjust = 0,
+    size = 2.7
+  ) +
+  facet_wrap(~ producer, ncol = 2, scales = "free_y") +
+  scale_linewidth_continuous(
+    range = c(0.3, 3),
+    name = "Songs produced\ntogether"
+  ) +
+  coord_cartesian(
+    xlim = c(-0.6, 1.6),
+    clip = "off"
+  ) +
+  labs(
+    title = "Some country producers stick with one artist",
+    subtitle = "Others work across the genre",
+    caption = "Source: TidyTuesday – Country Music Lyrics"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(
+      size = 20,
+      face = "bold"
+    ),
+    plot.subtitle = element_text(size = 13),
+    strip.text = element_blank(),
+    legend.position = "bottom",
+    plot.margin = margin(20, 80, 20, 120)
+  )
+```
+:::
+
+::: footer
+[@ponce2026]
+:::
+:::::::
+
+## Two columns slide; both incremental
 
 :::::::: columns
 :::: {.column .incremental width="50%"}
@@ -251,7 +424,7 @@ less.
 ## Conclusions
 
 ::: incremental
--  hhhh
+- hhhh
 
 - 
 :::
