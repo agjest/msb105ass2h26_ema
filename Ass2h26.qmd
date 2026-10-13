@@ -1,6 +1,6 @@
 ---
-title: My Presentation
-author: Group X; author 1, author 2 and author 3
+title: Have you heard about TidyTuesday?
+author: Group 5; Maa, Em and Mfe
 institute: HVL
 papersize: a4
 #lang: en-GB
