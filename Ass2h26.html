@@ -31,7 +31,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="Ass2h26_files/libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
   <link href="Ass2h26_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Ass2h26_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -157,19 +176,25 @@ Group X; author 1, author 2 and author 3
 <li class="fragment">neste</li>
 </ul>
 </section>
-<section id="second-slide" class="slide level2">
-<h2>Second slide</h2>
-<p>Some text first. Then whole list</p>
-<div class="fragment">
+<section id="why-might-this-be-relevant-for-us" class="slide level2">
+<h2>Why might this be relevant for us?</h2>
+<p>TidyTuesday gives us a practical way to develop important data science skills.</p>
 <ul>
-<li>1
+<li class="fragment">Practice with real-world data
 <ol type="1">
-<li>en</li>
-<li>to</li>
-<li>tre</li>
+<li class="fragment">Data wrangling</li>
+<li class="fragment">Data visualization</li>
 </ol></li>
-<li>2</li>
+<li class="fragment">Develop important data science skills</li>
+<li class="fragment">Learn from others
+<ol type="1">
+<li class="fragment">Compare different solutions</li>
+<li class="fragment">Discover new methods and visualization ideas</li>
+<li class="fragment">See that the same dataset can be analysed in many ways</li>
+</ol></li>
 </ul>
+<div class="footer">
+<p><span class="citation" data-cites="arroyo2022">Arroyo (<a href="#/global-health-spending" role="doc-biblioref" onclick="">2022</a>)</span></p>
 </div>
 </section>
 <section id="two-columns-slide-first-incremental" class="slide level2">
@@ -198,43 +223,51 @@ Group X; author 1, author 2 and author 3
 </ul>
 </div></div>
 </section>
-<section id="two-columns-slide-both-incremental" class="slide level2">
-<h2>Two columns slide; both incremental</h2>
+<section id="global-health-spending" class="slide level2 smaller scrollable">
+<h2>Global Health Spending</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
-<p>First some text</p>
+<p>WHO Global Health Expenditure Database (TidyTuesday 2026, week 16)</p>
 </div>
 <ul>
-<li class="fragment">one
+<li class="fragment">What the dataset is about
 <ol type="1">
-<li class="fragment">en</li>
-<li class="fragment">to</li>
-<li class="fragment">tre</li>
+<li class="fragment">Health spending in 195 countries, 2000-2023</li>
+<li class="fragment">Who pays for health care: government, households or foreign aid</li>
 </ol></li>
-<li class="fragment">neste</li>
+<li class="fragment">How it can be analysed
+<ol type="1">
+<li class="fragment">Scatter plot: government spending vs.&nbsp;what people pay themselves</li>
+<li class="fragment">Do people pay more when the government spends less?</li>
+</ol></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<ul>
-<li class="fragment">1
-<ol type="1">
-<li class="fragment">en</li>
-<li class="fragment">to</li>
-<li class="fragment">tre</li>
-</ol></li>
-<li class="fragment">2</li>
-</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Ass2h26_files/figure-revealjs/unnamed-chunk-1-1.png" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
 <div class="fragment">
-<p>Som text after point list.</p>
+<p>Ponce (2026) finds that households pay more where governments spend less.</p>
+</div>
+<div class="footer">
+<p><span class="citation" data-cites="ponce2026">Ponce (<a href="#/global-health-spending" role="doc-biblioref" onclick="">2026</a>)</span></p>
 </div>
 </div></div>
-</section>
-<section id="conclusions" class="slide level2">
-<h2>Conclusions</h2>
-</section>
-<section id="references" class="slide level2">
-<h2>References</h2>
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-arroyo2022" class="csl-entry" role="listitem">
+Arroyo, Isaac. 2022. <span>“Explaining My Favourite #<span>TidyTuesday Projects</span>.”</span> Towards Data Science, September 12. <a href="https://towardsdatascience.com/explaining-my-favourite-tidytuesday-projects-e44bfe988813/">https://towardsdatascience.com/explaining-my-favourite-tidytuesday-projects-e44bfe988813/</a>.
+</div>
+<div id="ref-ponce2026" class="csl-entry" role="listitem">
+Ponce, Steven. 2026. <span>“Where Governments Spend Less, Households Spend More.”</span> Steven Ponce, April 18. <a href="https://stevenponce.netlify.app/data_visualizations/TidyTuesday/2026/tt_2026_16.html#fig-1">https://stevenponce.netlify.app/data_visualizations/TidyTuesday/2026/tt_2026_16.html#fig-1</a>.
+</div>
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -451,6 +484,44 @@ Group X; author 1, author 2 and author 3
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
