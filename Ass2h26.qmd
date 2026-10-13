@@ -34,6 +34,7 @@ editor_options:
     wrap: 72
     canonical: true
     chunk_output_type: console
+bibliography: [myrefs.bib]
 abstract: |
   A short abstract describing the content of the presentation. This will only appear in the `typst` and `html document` version.
 echo: true
@@ -143,7 +144,7 @@ Example analysis of a TidyTuesday dataset
   7.  Shows hos one dataset can answer different questions
 ::::
 
-:::: {.column .incremental width="50%"}
+::: {.column .incremental width="50%"}
 ```{r}
 #| echo: false
 #| warning: false
@@ -274,12 +275,11 @@ ggplot(producer_data) +
     plot.margin = margin(20, 80, 20, 120)
   )
 ```
-
-::: fragment
-
-Som text after point list.
 :::
-::::
+
+::: footer
+[@ponce2026]
+:::
 :::::::
 
 ## Two columns slide; both incremental
