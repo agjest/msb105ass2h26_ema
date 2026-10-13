@@ -114,7 +114,7 @@ WHO Global Health Expenditure Database (TidyTuesday 2026, week 16)
   2.  Do people pay more when the government spends less?
 ::::
 
-:::: {.column .incremental width="50%"}
+::::: {.column .incremental width="50%"}
 ```{r}
 #| echo: false
 #| fig-width: 12
@@ -220,12 +220,9 @@ p_scatter + p_trend +
 Ponce (2026) finds that households pay more where governments spend
 less.
 :::
-::::
 
 ::: footer
+@ponce2026
 :::
+:::::
 ::::::::
-
-## References
-
-::::::::::::
