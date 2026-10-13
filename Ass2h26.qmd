@@ -36,7 +36,7 @@ editor_options:
     chunk_output_type: console
 bibliography: [Ass2h26.bib, myrefs.bib]
 abstract: |
-  A short abstract describing the content of the presentation. This will only appear in the `typst` and `html document` version.
+  This presentation introduces TidyTuesday, a weekly data science project where participants explore, analyse, and visualise different datasets. We explain what TidyTuesday is, why it is relevant and how to participate. We also explore three interesting datasets: Dead Sea Scrolls Manuscripts, Global Health Spending, and Country Music Lyrics, showing how each can be analysed and visualised. 
 echo: true
 eval: true
 # Feel free to add more stash
@@ -249,5 +249,11 @@ less.
 ::::::::
 
 ## Conclusions
+
+::: incremental
+-  hhhh
+
+- 
+:::
 
 ## References
